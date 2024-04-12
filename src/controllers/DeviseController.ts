@@ -1,6 +1,7 @@
 // DeviseController.ts
 import { Request, Response } from 'express';
 import Devise from '../models/Devise';
+import CoursDeChange from '../models/CoursDeChange';
 
 class DeviseController {
   
@@ -16,7 +17,9 @@ class DeviseController {
   static async getAllWithCoursDeChange(req: Request, res: Response) {
     try {
       const devises = await Devise.findAll({
-        include: 'coursDeChange', 
+        include: {
+          model: CoursDeChange
+        }, 
       });
       return res.json(devises);
     } catch (error) {

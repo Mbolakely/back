@@ -39,6 +39,7 @@ CoursDeChange.init(
   }
 );
 
-CoursDeChange.belongsTo(Devise, { foreignKey: 'deviseId', as: 'devise' });
+CoursDeChange.belongsTo(Devise, { foreignKey: 'deviseId'});
+Devise.hasMany(CoursDeChange, { foreignKey: 'deviseId'});
 
 export default CoursDeChange;

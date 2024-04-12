@@ -1,10 +1,11 @@
 // App.ts
-const express = require('express');
-const cors = require("cors")
+// nps tsx index.ts {startup command}
 import deviseRoute from './src/routes/DeviseRoute';
 import coursDeChangeRoute from './src/routes/CoursDeChangeRoute';
 import registrationRoutes from './src/routes/registrationRoute';
 import corsConfig from './src/CorsConfiguration/cors';
+import express from "express"
+import cors from "cors"
 
 
 
