@@ -1,7 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../../config/database';
+import Session from './Session';
+import Enchere from './Enchere';
 
-class Registration extends Model {
+class User extends Model {
   public id!: number;
   public nom!: string;
   public prenom!: string;
@@ -16,7 +18,7 @@ class Registration extends Model {
   public readonly updatedAt!: Date;
 }
 
-Registration.init(
+User.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -58,8 +60,12 @@ Registration.init(
   },
   {
     sequelize,
-    tableName: 'registrations', 
+    tableName: 'user', 
   }
 );
 
-export default Registration;
+
+User.belongsToMany(Session, { through: Enchere, as: "sessions" });
+Session.belongsToMany(User, { through: Enchere, as: "users" });
+
+export default User;

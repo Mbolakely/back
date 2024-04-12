@@ -1,6 +1,6 @@
 import { object, string } from 'zod';
 
-export const RegistrationSchema = object({
+export const UserSchema = object({
   nom: string().max(150),
   prenom: string().max(100),
   adress: string(),

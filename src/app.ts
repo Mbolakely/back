@@ -2,7 +2,7 @@
 const express = require('express');
 import deviseRoute from './routes/DeviseRoute';
 import coursDeChangeRoute from './routes/CoursDeChangeRoute';
-import authentificationRoute from './routes/RegistrationRoute';
+import authentificationRoute from './routes/UserRoute';
 
 const app = express();
 

@@ -1,9 +1,10 @@
 // App.ts
 // nps tsx index.ts {startup command}
-import deviseRoute from './src/routes/DeviseRoute';
-import coursDeChangeRoute from './src/routes/CoursDeChangeRoute';
-import registrationRoutes from './src/routes/registrationRoute';
+import userRoute from './src/routes/UserRoute';
+import sessionRoute from './src/routes/SessionRoute';
+import enchereRoute from './src/routes/EnchereRoute';
 import corsConfig from './src/CorsConfiguration/cors';
+
 import express from "express"
 import cors from "cors"
 
@@ -17,9 +18,9 @@ app.use(cors(corsConfig))
 app.use(express.json());
 
 // Use route
-app.use(deviseRoute);
-app.use(coursDeChangeRoute);
-app.use('/api/users', registrationRoutes);
+app.use("/api"+userRoute);
+app.use("/api"+sessionRoute);
+app.use("/api"+enchereRoute);
 
 
 

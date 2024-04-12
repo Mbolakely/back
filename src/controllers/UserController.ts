@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import Registration from '../models/Registration';
-import { RegistrationSchema } from '../schema/RegistrationSchema';
+import User from '../models/User';
+import { UserSchema } from '../schema/UserSchema';
 import zod from 'zod'
 
-class RegistrationController {
+class UserController {
   // S'inscrire
   static async register(req: Request, res: Response) {
     try {
-      const { nom, prenom, adress, contact, email, password } = RegistrationSchema.parse(req.body);
+      const { nom, prenom, adress, contact, email, password } = UserSchema.parse(req.body);
 
-      const existingUser = await Registration.findOne({ where: { email } });
+      const existingUser = await User.findOne({ where: { email } });
       if (existingUser) {
         return res.status(400).json({ message: 'Un utilisateur avec cet email existe déjà' });
       }
@@ -19,7 +19,7 @@ class RegistrationController {
      
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = await Registration.create({ nom, prenom, adress, contact, email, password: hashedPassword });
+      const newUser = await User.create({ nom, prenom, adress, contact, email, password: hashedPassword });
 
       const token = jwt.sign({ userId: newUser.id }, 'votre_clé_secrète', { expiresIn: '1h' });
 
@@ -36,8 +36,8 @@ class RegistrationController {
   static async login(req: Request, res: Response) {
     try {
     
-      const { email, password } = RegistrationSchema.parse(req.body);
-      const user = await Registration.findOne({ where: { email } });
+      const { email, password } = UserSchema.parse(req.body);
+      const user = await User.findOne({ where: { email } });
       if (!user) {
         return res.status(404).json({ message: 'Utilisateur non trouvé' });
       }
@@ -63,7 +63,7 @@ class RegistrationController {
     const { id } = req.params;
 
     try {
-      const user = Registration.findByPk(id)
+      const user = User.findByPk(id)
   
       if (user){
         res.json(user)
@@ -78,4 +78,4 @@ class RegistrationController {
 
 }
 
-export default RegistrationController;
+export default UserController;
