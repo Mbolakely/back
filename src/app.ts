@@ -1,12 +1,23 @@
-const express = require('express');     
-const cors = require('cors');
-import VenteRoutes from './routes/VenteRoutes';
+// App.ts
+const express = require('express');
+import deviseRoute from './routes/DeviseRoute';
+import coursDeChangeRoute from './routes/CoursDeChangeRoute';
+import authentificationRoute from './routes/RegistrationRoute';
 
 const app = express();
-app.use(cors());
-  
+
+
 app.use(express.json());
 
-app.use('/api', VenteRoutes);
+// Utiliser les routes pour l'authentification
+app.use(authentificationRoute);
 
-export default app;
+
+// Utiliser les routes pour les devises
+app.use(deviseRoute);
+
+// Utiliser les routes pour les cours de change
+app.use(coursDeChangeRoute);
+
+
+

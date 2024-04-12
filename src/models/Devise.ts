@@ -1,45 +1,42 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../../config/database';
+import CoursDeChange from './CoursDeChange';
 
-class Vente extends Model {
+class Devise extends Model {
   public id!: number;
-  public numProduit!: number;
-  public design!: string;
-  public prix!: number;
-  public quantite!: number;
+  public nom!: string;
+  public code!: string;
+  public taux!: number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-Vente.init(
+Devise.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true,
     },
-    numProduit: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    design: {
+    nom: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    prix: {
-      type: DataTypes.FLOAT,
+    code: {
+      type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
-    quantite: {
-      type: DataTypes.INTEGER,
+    taux: {
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
   },
   {
     sequelize,
-    tableName: 'ventes',
-  }
+    tableName: 'devises',
+  } 
 );
 
-export default Vente;
+export default Devise;
