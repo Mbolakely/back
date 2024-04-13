@@ -11,16 +11,16 @@ import cors from "cors"
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 // Cors configuration
 app.use(cors(corsConfig))
 app.use(express.json());
 
 // Use route
-app.use("/api"+userRoute);
-app.use("/api"+sessionRoute);
-app.use("/api"+enchereRoute);
+app.use("/api",userRoute);
+app.use("/api",sessionRoute);
+app.use("/api",enchereRoute);
 
 
 

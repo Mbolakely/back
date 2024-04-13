@@ -1,4 +1,4 @@
-import { object, string } from 'zod';
+import { boolean, object, string } from 'zod';
 
 export const UserSchema = object({
   nom: string().max(150),
@@ -7,4 +7,5 @@ export const UserSchema = object({
   contact: string().max(12),
   email: string().email(),
   password: string().min(6),
+  isAdmin: boolean().default(false)
 });

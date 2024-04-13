@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-const DB_NAME = 'api';
+const DB_NAME = 'backend';
 const DB_USER = 'root';
 const DB_PASSWORD = '';
 const DB_HOST = 'localhost'; 

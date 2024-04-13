@@ -5,7 +5,7 @@ import jwtMiddleware from '../middleware/JwtMiddleware';
 
 const router = express.Router();
 
-router.get('/sessions', jwtMiddleware, SessionController.getAllSessions);
+router.get('/sessions', SessionController.getAllSessions);
 
 router.get('/sessions/:id', jwtMiddleware, SessionController.getSessionById);
 

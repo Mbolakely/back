@@ -1,6 +1,6 @@
 // SessionController.ts
 import { Request, Response } from 'express';
-import Session from '../models/Session';
+import {Session} from '../models/models';
 
 class SessionController {
   

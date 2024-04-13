@@ -40,7 +40,7 @@ Session.init(
   },
   {
     sequelize,
-    tableName: 'session',
+    tableName: 'sessions',
   } 
 );
 

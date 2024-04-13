@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import User from '../models/User';
+import {User} from '../models/models';
 import { UserSchema } from '../schema/UserSchema';
 import zod from 'zod'
 
@@ -9,7 +9,7 @@ class UserController {
   // S'inscrire
   static async register(req: Request, res: Response) {
     try {
-      const { nom, prenom, adress, contact, email, password } = UserSchema.parse(req.body);
+      const { nom, prenom, adress, contact, email, password, isAdmin } = UserSchema.parse(req.body);
 
       const existingUser = await User.findOne({ where: { email } });
       if (existingUser) {
@@ -19,9 +19,9 @@ class UserController {
      
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = await User.create({ nom, prenom, adress, contact, email, password: hashedPassword });
+      const newUser = await User.create({ nom, prenom, adress, contact, email, password: hashedPassword, isAdmin:((isAdmin)?isAdmin:false) });
 
-      const token = jwt.sign({ userId: newUser.id }, 'votre_clé_secrète', { expiresIn: '1h' });
+      const token = jwt.sign({ userId: newUser.id, isAdmin: newUser.isAdmin }, 'votre_clé_secrète', { expiresIn: '1h' });
 
       res.status(201).json({ user: newUser, token });
     } catch (error:any) {
@@ -47,10 +47,11 @@ class UserController {
         return res.status(401).json({ message: 'Mot de passe incorrect' });
       }
 
-      const token = jwt.sign({ userId: user.id }, '1234', { expiresIn: '1h' });
+      const token = jwt.sign({ userId: user.id, isAdmin: user.isAdmin }, '1234', { expiresIn: '1h' });
 
       res.json({ user, token });
     } catch (error:any) {
+      console.error('Erreur capturée :', error); 
       if (error instanceof zod.ZodError) {
         return res.status(400).json({ message: 'Données d\'entrée non valides', errors: error.errors });
       }
@@ -63,9 +64,14 @@ class UserController {
     const { id } = req.params;
 
     try {
-      const user = User.findByPk(id)
+      const user = await User.findOne({
+        where:{
+          id:id
+        }
+      })
   
       if (user){
+        console.log(user)
         res.json(user)
       } else {
         res.status(404).json({message: "Aucun utilisateur non trouvé."})

@@ -1,6 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes, } from 'sequelize';
 import sequelize from '../../config/database';
-import Devise from './Session';
 import Session from './Session';
 import User from './User';
 
@@ -31,19 +30,19 @@ Enchere.init(
   },
   {
     sequelize,
-    tableName: 'enchere',
+    tableName: 'encheres',
   }
 );
 
 
-User.belongsToMany(Session, { through: Enchere });
-Session.belongsToMany(User, { through: Enchere });
+// User.belongsToMany(Session, { through: Enchere });
+// Session.belongsToMany(User, { through: Enchere });
 
-Enchere.belongsTo(User);
-Enchere.belongsTo(Session);
+// Enchere.belongsTo(User);
+// Enchere.belongsTo(Session);
 
-User.hasMany(Enchere);
-Session.hasMany(Enchere);
+// User.hasMany(Enchere);
+// Session.hasMany(Enchere);
 
 // CoursDeChange.belongsTo(Devise, { foreignKey: 'deviseId'});
 // Devise.hasMany(CoursDeChange, { foreignKey: 'deviseId'});

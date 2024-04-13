@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 import EnchereController from '../controllers/EnchereController';
 import jwtMiddleware from '../middleware/JwtMiddleware';
 

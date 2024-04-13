@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import Enchere from '../models/Enchere';
-import User from '../models/User';
+import {Enchere, User} from '../models/models';
+// import User from '../models/User';
 
 class EnchereController {
 
