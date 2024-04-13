@@ -29,9 +29,9 @@ class SessionController {
   }
 
   static async createSession(req: Request, res: Response) {
-    const { date, duree, productId } = req.body;
+    const { date, duree, productId, active } = req.body;
     try {
-      const session = await Session.create({date, duree, productId });
+      const session = await Session.create({date, duree, productId, active });
       res.status(201).json(session);
     } catch (error:any) {
       res.status(400).json({ message: error.message });

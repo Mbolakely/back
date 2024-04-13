@@ -1,9 +1,9 @@
 // App.ts
 // nps tsx index.ts {startup command}
-import userRoute from './src/routes/UserRoute';
-import sessionRoute from './src/routes/SessionRoute';
-import enchereRoute from './src/routes/EnchereRoute';
-import corsConfig from './src/CorsConfiguration/cors';
+import userRoute from './routes/UserRoute';
+import sessionRoute from './routes/SessionRoute';
+import enchereRoute from './routes/EnchereRoute';
+// import corsConfig from './src/CorsConfiguration/cors';
 
 import express from "express"
 import cors from "cors"
@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 // Cors configuration
-app.use(cors(corsConfig))
+app.use(cors())
 app.use(express.json());
 
 // Use route

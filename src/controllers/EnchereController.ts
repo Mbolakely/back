@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {Enchere, User} from '../models/models';
+import {Enchere, Session, User} from '../models/models';
 // import User from '../models/User';
 
 class EnchereController {
@@ -14,10 +14,13 @@ class EnchereController {
       })
       
       if (user){
-        const sessions = await User.getSession();
+        const sessions = await Enchere.findOne({
+          where: { userId: user.id }
+        });
+        console.log({sessions, user})
         res.json(sessions)
       } else {
-        res.status(404).json({message: "Aucun utilisateur non trouvé."})
+        res.status(404).json({message: "Aucun utilisateur trouvé."})
       }
       
     } catch (error:any) {
@@ -46,7 +49,7 @@ class EnchereController {
     try {
       const enchere = await Enchere.findOne({
         where: {
-          userdId: userId,
+          userId: userId,
           sessionId: sessionId
         }
       });

@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import sequelize from '../../config/database';
+import db from '../../config/database';
 class User extends Model {
   public id!: number;
   public nom!: string;
@@ -19,7 +19,7 @@ class User extends Model {
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -62,7 +62,7 @@ User.init(
     },
   },
   {
-    sequelize,
+    sequelize: db,
     tableName: 'users', 
   }
 );
@@ -80,21 +80,21 @@ class Enchere extends Model {
 Enchere.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    userId: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-    },
-    sessionId: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-    },
+    // userId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
+    // sessionId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
   },
   {
-    sequelize,
+    sequelize: db,
     tableName: 'encheres',
   }
 );
@@ -113,7 +113,7 @@ class Session extends Model {
 Session.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -122,7 +122,7 @@ Session.init(
       allowNull: false,
     },
     duree: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
       unique: false,
     },
@@ -136,7 +136,7 @@ Session.init(
     },
   },
   {
-    sequelize,
+    sequelize: db,
     tableName: 'sessions',
   } 
 );
